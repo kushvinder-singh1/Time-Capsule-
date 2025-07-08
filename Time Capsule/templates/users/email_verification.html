@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Time Capsule</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #6a11cb;
+      color: #ffffff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="email-container">
+    <h2 style="color: #333;">Hi {{ user.username }},</h2>
+
+    <p>Welcome to <strong>Time Capsule</strong>! 🎉</p>
+
+    <p>We're excited to have you on board. Before you get started, please verify your email address by clicking the button below:</p>
+
+    <a href="{{ url }}" class="btn">Verify My Account</a>
+
+    <p>If the button doesn’t work, you can copy and paste this link into your browser:</p>
+    <p><a href="{{ url }}">{{ url }}</a></p>
+
+    <p>If you didn’t create a Time Capsule account, feel free to ignore this email.</p>
+
+    <p>Thanks & happy journaling,<br>
+    <strong>The Time Capsule Team</strong></p>
+
+    <div class="footer">
+      &copy; {{ year|default:"2025" }} Time Capsule. All rights reserved.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  .auth-container {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+  .auth-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 25px;
+  }
+  a {
+    color: #90caf9;
+  }
+  .btn-theme {
+    background-color: #6a11cb;
+    color: white;
+  }
+  .btn-theme:hover {
+    background-color: #5311a8;
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm p-4 mt-5 rounded-4 border border-success">
+      <h3 class="mb-3 text-center text-success">👤 Create Your Account</h3>
+      <p class="text-center text-muted">Join Time Capsule to preserve your thoughts and memories securely.</p>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-theme w-100 mt-3">Sign Up</button>
+      </form>
+
+      <div class="text-center mt-4">
+        <p>Already have an account? <a href="{% url 'login' %}" class="text-decoration-none">Log in here</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

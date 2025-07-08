@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  .logout-container {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    margin-top: 60px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+  .logout-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 25px;
+  }
+  .btn-theme {
+    background-color: #6a11cb;
+    color: white;
+  }
+  .btn-theme:hover {
+    background-color: #5311a8;
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="logout-container">
+      <img src="{% static 'images/auth-banner.jpg' %}" alt="Goodbye" class="logout-image">
+      <h2 class="text-light">👋 You’ve been logged out</h2>
+      <p class="text-muted">Thanks for visiting Time Capsule. We hope to see you again soon!</p>
+      <a href="{% url 'login' %}" class="btn btn-theme mt-3">Login Again</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-lg mt-4 animate__animated animate__fadeIn">
+      <div class="card-body">
+        <h2 class="card-title mb-3">{{ capsule.title }}</h2>
+        <p class="text-muted">To: {{ capsule.recipient_email }}</p>
+        <div class="mb-3">{{ capsule.message|safe }}</div>
+        {% if capsule.file %}
+          <div class="mb-3">
+            <a href="{{ capsule.file.url }}" target="_blank" class="btn btn-outline-secondary">
+              <i class="bi bi-paperclip"></i> View Attachment
+            </a>
+          </div>
+        {% endif %}
+        <p class="mt-4"><a href="{% url 'capsule_dashboard' %}" class="btn btn-link">&larr; Back to Dashboard</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 

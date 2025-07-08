@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% block content %}
+<h2 class="mb-4">My Capsules</h2>
+<form method="get" class="mb-3 row g-2 align-items-center">
+  <div class="col-auto">
+    <input type="date" name="date" value="{{ filter_date }}" class="form-control" />
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-outline-primary">Filter by Date</button>
+    <a href="{% url 'capsule_dashboard' %}" class="btn btn-link">Clear</a>
+  </div>
+</form>
+<div class="row">
+  <div class="col-md-6">
+    <h4>Locked Capsules</h4>
+    {% for capsule in locked_capsules %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ capsule.title }}</h5>
+          <p class="card-text"><span class="badge bg-warning text-dark">Locked</span></p>
+          <p class="mb-1">Unlocks at: <strong>{{ capsule.unlock_datetime|localtime|date:'Y-m-d H:i' }}</strong></p>
+          <div class="countdown" data-unlock="{{ capsule.unlock_datetime|date:'c' }}" id="countdown-{{ capsule.id }}"></div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No locked capsules.</p>
+    {% endfor %}
+  </div>
+  <div class="col-md-6">
+    <h4>Unlocked Capsules</h4>
+    {% for capsule in unlocked_capsules %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ capsule.title }}</h5>
+          <p class="card-text"><span class="badge bg-success">Unlocked</span></p>
+          <a href="{% url 'capsule_detail' capsule.pk %}" class="btn btn-outline-primary btn-sm">View Capsule</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>No unlocked capsules.</p>
+    {% endfor %}
+  </div>
+</div>
+<script>
+// Countdown timer for each locked capsule
+function updateCountdowns() {
+  document.querySelectorAll('.countdown').forEach(function(el) {
+    const unlockTime = new Date(el.dataset.unlock);
+    const now = new Date();
+    let diff = unlockTime - now;
+    if (diff > 0) {
+      const days = Math.floor(diff / (1000*60*60*24));
+      diff -= days * (1000*60*60*24);
+      const hours = Math.floor(diff / (1000*60*60));
+      diff -= hours * (1000*60*60);
+      const minutes = Math.floor(diff / (1000*60));
+      diff -= minutes * (1000*60);
+      const seconds = Math.floor(diff / 1000);
+      el.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+    } else {
+      el.textContent = 'Ready to unlock!';
+    }
+  });
+}
+setInterval(updateCountdowns, 1000);
+updateCountdowns();
+</script>
+{% endblock %} 
