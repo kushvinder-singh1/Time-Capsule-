@@ -1,5 +1,3 @@
-Project Overview-
-
 The Time Capsule project is a Django-based web application designed to allow users to store digital memories or messages that can be accessed in the future. The idea revolves around the concept of a digital time capsule—users write messages, attach files, and schedule them to be revealed at a future date.
 
 Folder Structure-
